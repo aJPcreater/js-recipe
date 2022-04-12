@@ -2,26 +2,28 @@ const inputElement = document.getElementById("input-todo")
 const container = document.getElementById("cards-container")
 const addButton = document.getElementById("add-button")
 
-// card 欄作成で空にする
-const make = function () {
+inputElement.addEventListener("keypress", ill)
+
+function ill(e) {
+  if (e.keyCode === 13) {
+    // card を作成
+    const card = createCard(inputElement.value)
+    container.append(card)
+
+    // 入力欄を空にする
+    inputElement.value = ""
+
+    return false
+  }
+}
+
+addButton.onclick = function () {
   // card を作成
   const card = createCard(inputElement.value)
   container.append(card)
 
   //入力欄を空にする
   inputElement.value = ""
-}
-
-// Enter で内容確定させるメソッド
-inputElement.addEventListener("keypress", ill)
-function ill(e) {
-  if (e.keyCode === 13) {
-    make()
-  }
-}
-// 追加ボタン で内容追加させるメソッド
-addButton.onclick = function () {
-  make()
 }
 
 // 共通の処理：テキストからカードを作成する
