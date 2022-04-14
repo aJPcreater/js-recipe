@@ -1,27 +1,34 @@
 const quizText = document.getElementById("quiz-text")
 const quizImage = document.getElementById("quiz-image")
-const choice1 = document.getElementById("choice-1")
-const choice2 = document.getElementById("choice-2")
-const choice3 = document.getElementById("choice-3")
 const feedback = document.getElementById("feedback")
+const quizChoices = document.getElementById("quiz-choices")
+
+// 選択肢
+const choice1 = document.createElement("button")
+const choice2 = document.createElement("button")
+const choice3 = document.createElement("button")
+const choice4 = document.createElement("button")
 
 // クイズの内容
 const quiz = {
-  text: "この星の名前は何でしょう？",
-  image: "Ganymede.jpg",
+  text: "「Deco*27」読み方は？",
+  image: "http://studionas.org/uploads/2015/03/deco_main2.png",
   choices: [
     {
-      text: "ゴリアテ",
-      feedback:
-        "残念！ゴリアテは、旧約聖書に登場するダビデに石で殺される巨人だよ。",
+      text: "デコ掛けるにじゅうなな",
+      feedback: "残念！「*」が演算子であることは合ってるよ！",
     },
     {
-      text: "ゼニガメ",
-      feedback: "残念！ゼニガメは、クサガメまたはニホンイシガメの幼体だよ。",
+      text: "デコメ",
+      feedback: "残念！２７も読みます！",
     },
     {
-      text: "ガニメデ",
-      feedback: "正解！ガニメデは、木星の第三惑星だよ！",
+      text: "デコニーナ",
+      feedback: "正解！「２７」はニーナと読むみたいです",
+    },
+    {
+      text: "デコサンキュー",
+      feedback: "残念！２７をサンキューと読む天才ここにあらわる",
     },
   ],
 }
@@ -32,12 +39,17 @@ const reloadQuiz = function () {
   quizText.textContent = "Q. " + quiz.text
 
   // 画像を表示
-  quizImage.src = "images/" + quiz.image
+  quizImage.src = quiz.image
 
   // 選択肢（ボタン）の中身を表示
+
   choice1.textContent = quiz.choices[0].text
   choice2.textContent = quiz.choices[1].text
   choice3.textContent = quiz.choices[2].text
+  choice4.textContent = quiz.choices[3].text
+
+  //
+  quizChoices.append(choice1, choice2, choice3, choice4)
 }
 
 // choiceNumber番目の選択肢を選択
@@ -57,6 +69,10 @@ choice2.onclick = function () {
 choice3.onclick = function () {
   // 2番目の選択肢を選択
   choose(2)
+}
+choice4.onclick = function () {
+  // 3番目の選択肢を選択
+  choose(3)
 }
 
 // reloadQuiz関数 を実行して、クイズを画面に表示する。
