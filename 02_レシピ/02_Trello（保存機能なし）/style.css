@@ -11,8 +11,10 @@ header {
   width: 100%;
 }
 .header-title {
+  /*画面の幅変位対策 => display: flex*/
   display: flex;
   justify-content: center;
+  /* align-items でエリア内の位置を指定 */
   align-items: center;
   height: 40px;
   font-size: 1.5em;
@@ -20,11 +22,13 @@ header {
   color: #7fb1d2;
 }
 .main-container {
+  /*画面の幅変位対策 => display: flex*/
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
   height: 100vh;
   padding: 52px 12px 12px 12px;
+  /* 画面外でもスクロールで見れる */
   overflow-x: auto;
   background-color: #0076c2;
 }
@@ -47,6 +51,7 @@ header {
 .cards-container {
   max-height: calc(100vh - 200px);
   margin-top: 4px;
+  /* overflow-y でカードコンテナが画面高さ気にせず見られるようになった */
   overflow-y: auto;
 }
 .card {
@@ -57,6 +62,7 @@ header {
   box-shadow: 0 1px 0 #ccc;
 }
 .card:nth-of-type(n + 2) {
+  /* nth-of-type は条件指定 */
   margin-top: 8px;
 }
 .card:last-child {
@@ -74,11 +80,13 @@ header {
   position: absolute;
   bottom: 4px;
   right: 4px;
+  /* 重ね合わせレベルの調整 */
   z-index: 16;
   opacity: 0.5;
   color: #f00;
 }
 .card:hover .delete:after {
+  /* hover で onmouseover 状態でのみ表示 */
   content: "削除";
 }
 .card:hover .delete:hover {
