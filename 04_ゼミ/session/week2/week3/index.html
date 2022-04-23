@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>配列を使ったメモアプリ</title>
+  </head>
+  <body>
+    <h2>配列を使ったメモアプリ</h2>
+    <input type="text" id="memo-input" />
+    <button id="memochange">並び換え</button>
+    <button id="add-button">保存</button>
+    <div id="memo-container"></div>
+    <script>
+      const memoInput = document.getElementById("memo-input")
+      const addButton = document.getElementById("add-button")
+      const memoContainer = document.getElementById("memo-container")
+      const memoChange = document.getElementById("memochange")
+
+      const memofor = () => {
+        memoContainer.textContent = ""
+        for (let i = 0; i < memos.length; i++) {
+          const oneMemo = document.createElement("div")
+          oneMemo.textContent = memos[i].text
+          const getButton = document.createElement("button")
+          getButton.textContent = "消去"
+          oneMemo.append(getButton)
+          getButton.onclick = function () {
+            oneMemo.remove()
+          }
+          memoContainer.append(oneMemo)
+        }
+      }
+      let memos = []
+      if (localStorage.memos) {
+        // ローカルストレージのmemosキーからJSONを読み込む。
+        const memosJson = localStorage.memos
+        // JSON.parseで配列にして、memosを更新する。
+        memos = JSON.parse(memosJson)
+
+        memofor()
+      }
+
+      addButton.onclick = function () {
+        // inputに入力した内容を取得する
+        const text = memoInput.value
+
+        hunyaKakko = { text: text, id: Math.random.toString(16) }
+        memos.push(hunyaKakko)
+        // ローカルストレージのmemosキーにJSONにしたmemosを保存する。
+        localStorage.memos = JSON.stringify(memos)
+        memofor()
+
+        // 取得した内容をDOMに反映する
+        memoInput.value = ""
+        console.log(memos)
+      }
+      memoChange.onclick = function () {
+        memos.sort()
+        console.log(memos)
+        memofor()
+      }
+    </script>
+  </body>
+</html>
